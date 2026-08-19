@@ -1,0 +1,3 @@
+convert: move seyram UI components from TSX to JSX (Chrome, ImportSheet, Reader, Screens)
+
+Preserve UI markup and styles; remove TypeScript-only syntax. Batch commit as requested.

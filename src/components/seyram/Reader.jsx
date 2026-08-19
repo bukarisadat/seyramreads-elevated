@@ -1,16 +1,7 @@
 import { Bookmark, Highlighter, Type, Volume2, X } from "lucide-react";
 import { useState } from "react";
-import type { LibraryFile } from "./data";
 
-export function Reader({
-  file,
-  onClose,
-  onToast,
-}: {
-  file: LibraryFile;
-  onClose: () => void;
-  onToast: (msg: string) => void;
-}) {
+export function Reader({ file, onClose, onToast }) {
   const [confirming, setConfirming] = useState(false);
 
   return (
@@ -33,12 +24,9 @@ export function Reader({
         </div>
       </div>
 
-      <article className="mx-auto mb-28 mt-5 w-[min(100%-24px,760px)] rounded-3xl border border-border p-6 elev-3"
-        style={{ background: "var(--gradient-raise)" }}>
+      <article className="mx-auto mb-28 mt-5 w-[min(100%-24px,760px)] rounded-3xl border border-border p-6 elev-3" style={{ background: "var(--gradient-raise)" }}>
         <span className="badge-soft">IFRS 16 • Leases</span>
-        <h1 className="mt-3 font-display text-[25px] font-extrabold leading-tight">
-          Recognition and measurement of lease liabilities
-        </h1>
+        <h1 className="mt-3 font-display text-[25px] font-extrabold leading-tight">Recognition and measurement of lease liabilities</h1>
         <p className="mt-4 text-sm leading-[1.75] text-foreground/85">
           At the commencement date, a lessee recognises a right-of-use asset and a lease liability. The purpose is
           to reflect the economic reality that the entity controls the use of an identified asset while also having
@@ -50,10 +38,7 @@ export function Reader({
           commencement date. Those payments are discounted using the interest rate implicit in the lease, if that
           rate can be readily determined.
         </p>
-        <div
-          className="my-5 rounded-2xl border-l-4 border-primary p-4 font-display text-sm font-bold"
-          style={{ background: "var(--color-primary-soft)", boxShadow: "var(--shadow-inset)" }}
-        >
+        <div className="my-5 rounded-2xl border-l-4 border-primary p-4 font-display text-sm font-bold" style={{ background: "var(--color-primary-soft)", boxShadow: "var(--shadow-inset)" }}>
           PV = FV / (1 + r)<sup>n</sup>
         </div>
         <p className="mt-2 text-sm leading-[1.75] text-foreground/85">
@@ -101,17 +86,9 @@ export function Reader({
         <div className="fixed inset-0 z-30 grid place-items-center bg-foreground/45 p-5 backdrop-blur-sm">
           <div className="surface-raised w-full max-w-sm p-6 elev-4">
             <h3 className="font-display text-lg font-extrabold">Leave this document?</h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Your highlights and reading position are saved automatically before you exit.
-            </p>
+            <p className="mt-2 text-sm text-muted-foreground">Your highlights and reading position are saved automatically before you exit.</p>
             <div className="mt-5 flex gap-3">
-              <button
-                type="button"
-                onClick={() => setConfirming(false)}
-                className="tactile surface-inset touch-target flex-1 rounded-2xl text-sm font-bold"
-              >
-                Keep reading
-              </button>
+              <button type="button" onClick={() => setConfirming(false)} className="tactile surface-inset touch-target flex-1 rounded-2xl text-sm font-bold">Keep reading</button>
               <button
                 type="button"
                 onClick={() => {

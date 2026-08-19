@@ -5,7 +5,7 @@ import { BottomNav, DesktopRail, TopBar } from "@/components/seyram/Chrome";
 import { ImportSheet } from "@/components/seyram/ImportSheet";
 import { Reader } from "@/components/seyram/Reader";
 import { AiScreen, HomeScreen, LibraryScreen, ProgressScreen, SettingsScreen } from "@/components/seyram/Screens";
-import { libraryFiles, type LibraryFile, type ScreenId } from "@/components/seyram/data";
+import { libraryFiles } from "@/components/seyram/data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -29,19 +29,19 @@ export const Route = createFileRoute("/")({
 });
 
 function SeyramReads() {
-  const [screen, setScreen] = useState<ScreenId>("home");
+  const [screen, setScreen] = useState("home");
   const [dark, setDark] = useState(false);
   const [offline, setOffline] = useState(true);
   const [sync, setSync] = useState(true);
   const [importOpen, setImportOpen] = useState(false);
-  const [readerFile, setReaderFile] = useState<LibraryFile | null>(null);
+  const [readerFile, setReaderFile] = useState(null);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
   }, [dark]);
 
-  const notify = (msg: string) => toast(msg);
-  const go = (id: ScreenId) => {
+  const notify = (msg) => toast(msg);
+  const go = (id) => {
     setScreen(id);
     window.scrollTo({ top: 0 });
   };

@@ -2,7 +2,7 @@ import { UploadCloud } from "lucide-react";
 
 const formats = ["PDF", "DOCX", "PPTX", "XLSX", "TXT", "IMAGE"];
 
-export function ImportSheet({ onClose, onImport }: { onClose: () => void; onImport: () => void }) {
+export function ImportSheet({ onClose, onImport }) {
   return (
     <div
       className="fixed inset-0 z-[100] flex items-end justify-center bg-foreground/50 backdrop-blur-sm"
