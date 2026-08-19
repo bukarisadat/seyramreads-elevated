@@ -55,7 +55,7 @@ function SeyramReads() {
         {screen === "home" && (
           <HomeScreen
             onImport={() => setImportOpen(true)}
-            onOpenReader={() => setReaderFile(libraryFiles[0])}
+            onOpenReader={() => setReaderFile(libraryFiles[0] ?? null)}
             onGo={go}
             onToast={notify}
           />

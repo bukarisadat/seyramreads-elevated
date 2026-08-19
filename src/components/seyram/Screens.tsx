@@ -99,7 +99,7 @@ export function HomeScreen({
 
       <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {quickActions.map((a, i) => {
-          const Icon = quickIcons[i];
+          const Icon = quickIcons[i] ?? Brain;
           return (
             <button
               key={a.id}
@@ -178,7 +178,7 @@ export function HomeScreen({
         <SectionHead title="Study tools" sub="Built for accounting documents" />
         <div className="grid gap-3">
           {tools.map((t, i) => {
-            const Icon = toolIcons[i];
+            const Icon = toolIcons[i] ?? Table;
             return (
               <button
                 key={t.title}
@@ -321,7 +321,7 @@ export function AiScreen({ onToast }: { onToast: (msg: string) => void }) {
       <SectionHead title="AI study tools" sub="Online features • requires internet" />
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {aiCards.map((c, i) => {
-          const Icon = aiIcons[i];
+          const Icon = aiIcons[i] ?? Sparkles;
           return (
             <button
               key={c.title}
