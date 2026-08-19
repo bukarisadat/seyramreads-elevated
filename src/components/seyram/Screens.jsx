@@ -18,11 +18,12 @@ import {
 import { useState } from "react";
 import { aiCards, courses, coverTone, libraryFiles, quickActions, tools } from "./data";
 
+
 const quickIcons = [Brain, Sigma, Layers, Headphones];
 const toolIcons = [Table, Search, Highlighter];
 const aiIcons = [Sparkles, Sigma, Layers, Brain];
 
-function PageTitle({ title, sub }) {
+function PageTitle({ title, sub }: { title; sub) {
   return (
     <div className="mb-5 mt-2 px-0.5">
       <h1 className="font-display text-[28px] font-extrabold leading-tight">{title}</h1>
@@ -31,7 +32,7 @@ function PageTitle({ title, sub }) {
   );
 }
 
-function SectionHead({ title, sub, action, onAction }) {
+function SectionHead({ title, sub, action, onAction }: { title; sub?; action?; onAction?: () => void }) {
   return (
     <div className="mb-3 flex items-end justify-between gap-4">
       <div>
@@ -47,7 +48,17 @@ function SectionHead({ title, sub, action, onAction }) {
   );
 }
 
-export function HomeScreen({ onImport, onOpenReader, onGo, onToast }) {
+export function HomeScreen({
+  onImport,
+  onOpenReader,
+  onGo,
+  onToast,
+}
+  onImport: () => void;
+  onOpenReader: () => void;
+  onGo: (id: "library" | "ai" | "progress") => void;
+  onToast: (msg) => void;
+}) {
   return (
     <div className="space-y-7">
       <section className="surface-glass p-6 sm:p-8">
@@ -58,14 +69,11 @@ export function HomeScreen({ onImport, onOpenReader, onGo, onToast }) {
           >
             <span className="h-2 w-2 rounded-full bg-[oklch(0.85_0.14_160)] shadow-[0_0_0_4px_hsl(150_60%_70%/0.2)]" />
             Offline library available
-          </span>
           <h1 className="max-w-[520px] font-display text-[30px] font-extrabold leading-[1.07] sm:text-[38px]">
             Your accounting study desk, in your pocket.
-          </h1>
           <p className="mt-3 max-w-[510px] text-sm leading-relaxed" style={{ color: "hsl(0 0% 100% / 0.78)" }}>
             Read IFRS notes, extract formulas, listen to documents, generate summaries and revise with
             flashcards — online or offline.
-          </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <button
               type="button"
@@ -73,7 +81,6 @@ export function HomeScreen({ onImport, onOpenReader, onGo, onToast }) {
               className="tactile touch-target inline-flex items-center gap-2 rounded-2xl bg-card px-5 text-sm font-bold text-primary elev-3"
             >
               <Upload className="h-5 w-5" /> Import document
-            </button>
             <button
               type="button"
               onClick={() => onToast("Camera scanning is available in the mobile build")}
@@ -81,7 +88,6 @@ export function HomeScreen({ onImport, onOpenReader, onGo, onToast }) {
               style={{ background: "hsl(0 0% 100% / 0.14)", borderColor: "hsl(0 0% 100% / 0.2)" }}
             >
               <ScanLine className="h-5 w-5" /> Scan notes
-            </button>
           </div>
         </div>
       </section>
@@ -119,16 +125,15 @@ export function HomeScreen({ onImport, onOpenReader, onGo, onToast }) {
               className="flex min-h-[104px] flex-col justify-between rounded-2xl p-3 text-[10px] font-bold uppercase tracking-wide text-primary-foreground elev-2"
               style={{ background: "var(--gradient-gold)" }}
             >
-              <span>IFRS</span>
-              <b className="font-display text-2xl leading-none">16</b>
-              <span>Leases</span>
+              <span>IFRS
+              <b className="font-display text-2xl leading-none">16
+              <span>Leases
             </div>
             <div className="min-w-0">
-              <span className="badge-soft">Financial Reporting</span>
+              <span className="badge-soft">Financial Reporting
               <h3 className="mt-2 font-display text-[15px] font-bold leading-snug">
-                IFRS 16 — Leases: Recognition, Measurement & Disclosure
-              </h3>
-              <p className="mt-1 text-xs text-muted-foreground">Page 38 of 59 • Last read today</p>
+                IFRS 16 — Leases, Measurement & Disclosure
+              <p className="mt-1 text-xs text-muted-foreground">Page 38 of 59 • Last read today
               <div className="mt-3 flex items-center gap-3">
                 <div className="track h-2 flex-1">
                   <div className="track-fill" style={{ width: "64%" }} />
@@ -157,7 +162,6 @@ export function HomeScreen({ onImport, onOpenReader, onGo, onToast }) {
               <h3 className="mt-2 max-w-[110px] font-display text-lg font-extrabold leading-tight">{c.name}</h3>
               <span className="absolute bottom-4 left-4 text-[11px]" style={{ color: "hsl(0 0% 100% / 0.72)" }}>
                 {c.docs} documents
-              </span>
             </button>
           ))}
         </div>
@@ -200,12 +204,13 @@ const filters = [
   { id: "offline", label: "Offline" },
 ];
 
-export function LibraryScreen({ onOpen }) {
+export function LibraryScreen({ onOpen }: { onOpen: (file) => void }) {
   const [filter, setFilter] = useState("all");
   const [query, setQuery] = useState("");
 
   const files = libraryFiles.filter((f) => {
-    const matchesFilter = filter === "all" ? true : filter === "offline" ? f.offline : f.filter === filter;
+    const matchesFilter =
+      filter === "all" ? true === "offline" ? f.offline : f.filter === filter;
     const matchesQuery = f.title.toLowerCase().includes(query.trim().toLowerCase());
     return matchesFilter && matchesQuery;
   });
@@ -266,7 +271,7 @@ export function LibraryScreen({ onOpen }) {
                     : { background: "var(--color-surface-3)", color: "var(--color-muted-foreground)" }
                 }
               >
-                {f.offline ? <WifiOff className="h-3 w-3" /> : <Wifi className="h-3 w-3" />}
+                {f.offline ? <WifiOff className="h-3 w-3" /> ="h-3 w-3" />}
                 {f.offline ? "Offline" : "Online"}
               </span>
               <b className="text-[11px] text-primary">{f.progress}%</b>
@@ -276,33 +281,29 @@ export function LibraryScreen({ onOpen }) {
         {files.length === 0 && (
           <p className="col-span-full rounded-2xl p-6 text-center text-sm text-muted-foreground surface-inset">
             No documents match that search.
-          </p>
         )}
       </div>
     </div>
   );
 }
 
-export function AiScreen({ onToast }) {
+export function AiScreen({ onToast }: { onToast: (msg) => void }) {
   return (
     <div>
       <section className="surface-glass mb-5 p-6">
         <div className="relative">
           <span className="badge-soft" style={{ background: "hsl(0 0% 100% / 0.16)", color: "inherit" }}>
             <Sparkles className="h-3 w-3" /> Accounting AI
-          </span>
-          <h1 className="mt-3 font-display text-[25px] font-extrabold">Understand the hard parts faster.</h1>
+          <h1 className="mt-3 font-display text-[25px] font-extrabold">Understand the hard parts faster.
           <p className="mt-2 max-w-[450px] text-[13px] leading-relaxed" style={{ color: "hsl(0 0% 100% / 0.78)" }}>
             Select a document and let the study assistant simplify standards, explain accounting treatments,
             extract formulas or generate revision material.
-          </p>
           <button
             type="button"
             onClick={() => onToast("Pick a document from your library")}
             className="tactile touch-target mt-5 inline-flex items-center gap-2 rounded-2xl bg-card px-5 text-sm font-bold text-primary elev-3"
           >
             <BookOpen className="h-5 w-5" /> Choose a document
-          </button>
         </div>
       </section>
 
@@ -339,11 +340,9 @@ export function ProgressScreen() {
           <div>
             <span className="badge-soft" style={{ background: "hsl(0 0% 100% / 0.16)", color: "inherit" }}>
               This week
-            </span>
-            <h2 className="mt-3 font-display text-[28px] font-extrabold">4h 35m studied</h2>
+            <h2 className="mt-3 font-display text-[28px] font-extrabold">4h 35m studied
             <p className="mt-2 text-[13px]" style={{ color: "hsl(0 0% 100% / 0.78)" }}>
               12% more focused reading than last week.
-            </p>
           </div>
           <div
             className="grid h-[86px] w-[86px] shrink-0 place-items-center rounded-full font-display text-lg font-extrabold"
@@ -376,7 +375,7 @@ export function ProgressScreen() {
   );
 }
 
-function Toggle({ on, onChange, label }) {
+function Toggle({ on, onChange, label }: { on; onChange: (v) => void; label) {
   return (
     <button
       type="button"
@@ -398,12 +397,25 @@ function Toggle({ on, onChange, label }) {
   );
 }
 
-export function SettingsScreen({ dark, onDark, offline, onOffline, sync, onSync }) {
+export function SettingsScreen({
+  dark,
+  onDark,
+  offline,
+  onOffline,
+  sync,
+  onSync,
+}
+  dark;
+  onDark: (v) => void;
+  offline;
+  onOffline: (v) => void;
+  sync;
+  onSync: (v) => void;
+}) {
   const rows = [
-    { icon: Sparkles, title: "Dark mode", copy: "Comfortable late-night reading", on: dark, set: onDark },
-    { icon: Download, title: "Keep downloads offline", copy: "Save imported files on this device", on: offline, set: onOffline },
-    { icon: Wifi, title: "Sync notes when online", copy: "Backup progress, notes and highlights", on: sync, set: onSync },
-  ];
+    { icon, title: "Dark mode", copy: "Comfortable late-night reading", on, set
+    { icon, title: "Keep downloads offline", copy: "Save imported files on this device", on, set
+    { icon, title: "Sync notes when online", copy: "Backup progress, notes and highlights", on, set;
   return (
     <div>
       <PageTitle title="Settings" sub="Control your reading experience, storage and sync preferences." />
@@ -413,21 +425,18 @@ export function SettingsScreen({ dark, onDark, offline, onOffline, sync, onSync 
           style={{ background: "var(--gradient-brand)" }}
         >
           SA
-        </div>
         <div>
-          <h3 className="font-display text-[17px] font-extrabold">Stanley Accounting</h3>
-          <p className="mt-1 text-xs text-muted-foreground">Accounting Student • 46 local documents</p>
+          <h3 className="font-display text-[17px] font-extrabold">Stanley Accounting
+          <p className="mt-1 text-xs text-muted-foreground">Accounting Student • 46 local documents
         </div>
       </div>
 
       <div className="surface-raised mt-4 overflow-hidden p-0">
-        {rows.map(({ icon: Icon, title, copy, on, set }, i) => (
+        {rows.map(({ icon) => (
           <div
             key={title}
             className="flex items-center gap-3 p-4"
-            style={{ borderBottom: i < rows.length - 1 ? "1px solid var(--color-border)" : undefined }}
-          >
-            <span className="icon-tile h-10 w-10">
+            style={{ borderBottom="icon-tile h-10 w-10">
               <Icon className="h-4 w-4" />
             </span>
             <div>
