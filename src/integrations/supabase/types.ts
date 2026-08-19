@@ -14,7 +14,116 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      documents: {
+        Row: {
+          code: string
+          course: string
+          created_at: string
+          doc_type: string
+          id: string
+          last_page: number
+          meta: string
+          offline: boolean
+          progress: number
+          subject: string
+          title: string
+          tone: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          code?: string
+          course?: string
+          created_at?: string
+          doc_type?: string
+          id?: string
+          last_page?: number
+          meta?: string
+          offline?: boolean
+          progress?: number
+          subject?: string
+          title: string
+          tone?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          code?: string
+          course?: string
+          created_at?: string
+          doc_type?: string
+          id?: string
+          last_page?: number
+          meta?: string
+          offline?: boolean
+          progress?: number
+          subject?: string
+          title?: string
+          tone?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      highlights: {
+        Row: {
+          content: string
+          created_at: string
+          document_id: string | null
+          id: string
+          note: string
+          page: number
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          document_id?: string | null
+          id?: string
+          note?: string
+          page?: number
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          document_id?: string | null
+          id?: string
+          note?: string
+          page?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "highlights_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
